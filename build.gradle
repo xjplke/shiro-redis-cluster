@@ -1,0 +1,51 @@
+buildscript {
+    ext {
+        shiroVersion = '1.2.2' 
+		jredisVersion = '2.1.0'
+		packageVersion = '0.0.1-release'
+    } 
+    repositories {
+    	mavenLocal()
+    	mavenCentral()
+    	//maven { url "http://maven.oschina.net/content/groups/public/"}
+    }
+}
+
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    group = "me.itsoho"
+    version = "${packageVersion}"
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+    
+}
+
+
+apply plugin: 'eclipse'
+
+
+jar {
+    baseName = 'shiro-redis-cluster'
+    version =  "${packageVersion}"
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    //maven { url "http://maven.oschina.net/content/groups/public/" }
+}
+
+dependencies {
+    compile("org.apache.shiro:shiro-core:${shiroVersion}")
+    compile("org.apache.shiro:shiro-web:${shiroVersion}")
+    compile("org.apache.shiro:shiro-spring:${shiroVersion}")
+
+    compile("redis.clients:jedis:${jredisVersion}")     
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
